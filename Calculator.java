@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -24,6 +26,8 @@ class Handler{
 
         int nummer = 0;
 
+        leser.nextLine(); // Remove first sentence of csv-file
+
         while (leser.hasNextLine()){
             String innlest = leser.nextLine();
             String[] parsed = innlest.split(",");
@@ -45,16 +49,38 @@ class Handler{
             System.out.println("*********************");
 
             if (! persons.containsKey(name)){
-                persons.put(name, new Person(name));
+                Person newP = new Person(name);
+                persons.put(name, newP);
+                newP.addHoursOfSleep(Double.parseDouble(hoursOfSleep.trim()));
+            } else {
+                Person p = persons.get(name);
+                p.addHoursOfSleep(Double.parseDouble(hoursOfSleep.trim()));
             }
 
+        }
+
+        for (Person p : persons.values()){
+            p.printAllHours();
         }
     }
 }
 
 class Person{
     private String name;
+    private ArrayList<Double> hoursOfSleep;
     Person(String name){
         this.name = name;
+        hoursOfSleep = new ArrayList<Double>();
+    }
+
+    public void addHoursOfSleep(double hours){
+        hoursOfSleep.add(hours);
+    }
+
+    public void printAllHours(){
+        System.out.println(name + " sover: ");
+        for (Double d : hoursOfSleep){
+            System.out.println("Sov: " + d);
+        }
     }
 }
