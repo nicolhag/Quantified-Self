@@ -10,7 +10,7 @@ class Kalkulator{
 }
 
 class DeltakerBehandler{
-    HashMap<Deltaker> deltakere = new HashMap<Deltaker>();
+    HashMap<String, Deltaker> deltakere = new HashMap<String, Deltaker>();
 
     private void lesInnFraFil(String filnavn){
         Scanner leser = new Scanner(new File(filnavn));
