@@ -28,19 +28,25 @@ class Handler{
             String numberOfSteps = parsed[2];
             String hoursOfSleep = parsed[3];
 
-            System.out.println("Name: " + navn);
+            System.out.println("Name: " + name);
             System.out.println("Timestamp: " + timestamp);
-            System.out.println("Number of steps: " + antallSkritt);
-            System.out.println("Hours of sleep: " + antalltimerSovn);
+            System.out.println("Number of steps: " + numberOfSteps);
+            System.out.println("Hours of sleep: " + hoursOfSleep);
 
             System.out.println("*********************");
             System.out.println("*********************");
+
+            if (! persons.contains(navn)){
+                persons.put(navn, new Person(navn));
+            }
 
         }
     }
 }
 
 class Person{
-    String name;
-
+    private String name;
+    Person(String name){
+        this.name = name;
+    }
 }
