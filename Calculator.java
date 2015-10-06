@@ -51,7 +51,9 @@ class Handler{
             if (! persons.containsKey(name)){
                 Person newP = new Person(name);
                 persons.put(name, newP);
-                newP.addHoursOfSleep(Double.parseDouble(hoursOfSleep.trim()));
+                Date d = new Date(timestamp);
+                Measurement m = new Measurement(measureName, value, d);
+                newP.addMeasure(m);
             } else {
                 Person p = persons.get(name);
                 p.addHoursOfSleep(Double.parseDouble(hoursOfSleep.trim()));
@@ -73,7 +75,7 @@ class Person{
         hoursOfSleep = new ArrayList<Double>();
     }
 
-    public void addHoursOfSleep(double hours){
+    public void addMeasure(Measurement m){
         hoursOfSleep.add(hours);
     }
 
