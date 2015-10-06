@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.HashMap;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 class Calculator{
     public static void main(String[] args) throws Exception {
@@ -12,8 +13,15 @@ class Calculator{
 class Handler{
     HashMap<String, Person> persons = new HashMap<String, Person>();
 
-    private void readFromFile(String filnavn){
-        Scanner leser = new Scanner(new File(filnavn));
+    public void readFromFile(String filnavn){
+        Scanner leser = null;
+
+        try{
+            leser = new Scanner(new File(filnavn));
+        } catch (FileNotFoundException e){
+            System.out.println("File not found!!");
+        }
+
         int nummer = 0;
 
         while (leser.hasNextLine()){
@@ -36,8 +44,8 @@ class Handler{
             System.out.println("*********************");
             System.out.println("*********************");
 
-            if (! persons.contains(navn)){
-                persons.put(navn, new Person(navn));
+            if (! persons.containsKey(name)){
+                persons.put(name, new Person(name));
             }
 
         }
