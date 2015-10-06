@@ -5,14 +5,15 @@ import java.io.File;
 class Kalkulator{
     public static void main(String[] args) throws Exception {
         DeltakerBehandler d = new DeltakerBehandler();
+        d.lesInnFraFil("sample_fysisk.csv");
     }
 }
 
 class DeltakerBehandler{
     HashMap<Deltaker> deltakere = new HashMap<Deltaker>();
 
-    private void lesInnFraFil(){
-        Scanner leser = new Scanner(new File("sample_fysisk.csv"));
+    private void lesInnFraFil(String filnavn){
+        Scanner leser = new Scanner(new File(filnavn));
 
         while (leser.hasNextLine()){
             String innlest = leser.nextLine();
@@ -39,5 +40,6 @@ class DeltakerBehandler{
 }
 
 class Deltaker{
-    String
+    String navn;
+
 }
