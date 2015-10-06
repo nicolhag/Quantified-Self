@@ -14,6 +14,7 @@ class DeltakerBehandler{
 
     private void lesInnFraFil(String filnavn){
         Scanner leser = new Scanner(new File(filnavn));
+        int nummer = 0;
 
         while (leser.hasNextLine()){
             String innlest = leser.nextLine();
