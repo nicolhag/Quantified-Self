@@ -1,44 +1,88 @@
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MeasurementContainer {
 
-  HashMap<Date, Double> measurements;
-  /* Filters a measurement by person */
-  public boolean filterByPerson(Person person) {
+  //HashMap<Date, Double> measurements;
+  List<Measurable> measurements;
 
-  }
-  /* Removes a filter option */
-  public void removeFilter() {
-
-  }
-  /*
-  Returns all measurements, by filter criteria
-  If no filter, return all
-   */
-  public HashMap getAllMeasurements() {
-
+  public MeasurementContainer() {
+    this.measurements = new ArrayList<Measurable>();
   }
 
-  public HashMap getAllMeasurementsByDate(Date date) {
+  public void addMeasurement(Measurement m) {
+    this.measurements.add(m);
+  }
+
+  public boolean removeMeasurement(Measurement m) {
+    if(this.containsMeasurement(m)) {
+      this.measurements.remove(m);
+      return true;
+    }
+
+    return false;
+  }
+
+  // Returns all measurements
+  public List getMeasurements() {
+    return measurements;
+  }
+
+  // Creates a new int[] from a double[]
+  public int[] doubleToIntArray(double[] values) {
+    int[] intValues = new int[values.length];
+    for(int i = 0; i < values.length; i++) {
+      intValues[i] = (int) values[i];
+    }
+    return intValues;
+  }
+
+  public List getAllMeasurementsByDate(Date date) {
     new Date();
+    return null;
   }
 
-  public boolean containsMeasurement() {
-
+  public boolean containsMeasurement(Measurement m) {
+    if(this.measurements.contains(m)) return true;
+    return false;
   }
   /* Returns measurement mean */
-  public double getMean() {
-
+  public double getMean(double[] m)  {
+    double sum = 0;
+    for (int i = 0; i < m.length; i++) {
+      sum += m[i];
+    }
+    return sum / m.length;
   }
 
   /* Returns measurement mode */
-  public double getMode() {
+  public double getMode(int[] a) {
+    int maxValue = 0, maxCount = 0;
 
+    for (int i = 0; i < a.length; ++i) {
+      int count = 0;
+      for (int j = 0; j < a.length; ++j) {
+        if (a[j] == a[i]) ++count;
+      }
+      if (count > maxCount) {
+        maxCount = count;
+        maxValue = a[i];
+      }
+    }
+
+    return maxValue;
   }
 
   /* Return measurement median */
-  public double getMedian() {
-
+  public double getMedian(double[] m) {
+    int middle = m.length/2;
+      if (m.length%2 == 1) {
+        return m[middle];
+      } else {
+        return (m[middle-1] + m[middle]) / 2.0;
+      }
   }
 
 }
