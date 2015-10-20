@@ -20,6 +20,7 @@ class Calculator{
             System.out.println("Hva heter filen med psykiske data?");
             String psykisk = term.nextLine();
             d.readFromFile(fysisk, psykisk);
+
         } else if (args[0].trim().equals("default")){
             d.readFromFile("fysisk.csv", "psykisk.csv");
         } else {
@@ -33,6 +34,9 @@ class Calculator{
         d.printGeneralAverage("Energinivå");
         d.printGeneralAverage("Stressnivå");
         d.printGeneralAverage("Produktivitet");
+        d.printGeneralAverage("Sosial omgang");
+        d.printGeneralAverage("Måltider");
+        d.printGeneralAverage("Alkoholenheter");
 
     }
 }
@@ -124,9 +128,6 @@ class Handler{
           String innlest = leser.nextLine();
           String[] parsed = innlest.split(",");
 
-          //System.out.println("*********************");
-
-
           String timestamp = parsed[0];
           String name = parsed[1];
           String numberOfSteps = parsed[2];
@@ -143,10 +144,7 @@ class Handler{
               p = persons.get(name);
           }
 
-        //  m = new Measurement(headers[0], d, Double.parseDouble(parsed[0]));
-          //p.addMeasure(m);
-          //m = new Measurement(headers[1], d, Double.parseDouble(parsed[1]));
-          //p.addMeasure(m);
+          // Skipping timestamp and name atm
           m = new Measurement(headers[2], d, Double.parseDouble(parsed[2]));
           p.addMeasure(m);
           measurements.addMeasurement(m);
@@ -166,9 +164,6 @@ class Handler{
           String innlest = leser.nextLine();
           String[] parsed = innlest.split(",");
 
-          //System.out.println("*********************");
-
-
           String timestamp = parsed[0];
           String name = parsed[1];
           String measurementNumber = parsed[2];
@@ -178,13 +173,6 @@ class Handler{
           String meals = parsed[6];
           String alcoholUnits = parsed[7];
           String comments = parsed[8];
-
-          /*System.out.println("Name: " + name);
-          System.out.println("Timestamp: " + timestamp);
-          System.out.println("MeasurementNumber: " + measurementNumber);
-          System.out.println("Energy level: " + energy);
-
-          System.out.println("*********************"); */
 
           Person p = null;
           Date d = new Date(timestamp);
@@ -197,12 +185,7 @@ class Handler{
               p = persons.get(name);
           }
 
-          /*m = new Measurement(headers[0], d, Double.parseDouble(parsed[0]));
-          p.addMeasure(m);
-          m = new Measurement(headers[1], d, Double.parseDouble(parsed[1]));
-          p.addMeasure(m); */
-          //m = new Measurement(headers[2], d, Double.parseDouble(parsed[2]));
-          //p.addMeasure(m);
+          // Skipping timestamp, name and measurement number atm.
           m = new Measurement(headers[3], d, Double.parseDouble(parsed[3]));
           p.addMeasure(m);
           measurements.addMeasurement(m);
@@ -231,7 +214,6 @@ class Handler{
     }
 
     public void printAll() {
-      //this.measurements.printAll();
       for(Person pers: persons.values()) {
         pers.printAll();
       }
@@ -240,12 +222,10 @@ class Handler{
 
 class Person{
     private String name;
-    //private ArrayList<Double> hoursOfSleep = null;
     MeasurementContainer measurements = null;
 
     Person(String name){
         this.name = name;
-        //hoursOfSleep = new ArrayList<Double>();
         measurements = new MeasurementContainer();
     }
 
