@@ -9,11 +9,7 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-<<<<<<< HEAD
-        d.readFromFile("sample_fysisk.csv","sample_psykisk.csv");
-=======
-        d.readFromFile("fysisk.csv");
->>>>>>> 91d6fb4b144d044cefce9e55b6771c7b5af496c5
+        d.readFromFile("fysisk.csv","psykisk.csv");
     }
 }
 
