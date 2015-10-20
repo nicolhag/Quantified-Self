@@ -36,6 +36,25 @@ public class MeasurementContainer {
     return measurements;
   }
 
+  public double[] getAllMeasurementValues() {
+    double[] toReturn = new double[this.measurements.size()];
+
+    int i = 0;
+    for(Measurable m: measurements) {
+      toReturn[i++] = m.getValue();
+    }
+    return toReturn;
+  }
+
+  public double[] getMeasurementValues(List<Measurable> measurements) {
+    double[] toReturn = new double[measurements.size()];
+    int i = 0;
+    for(Measurable m: measurements) {
+      toReturn[i++] = m.getValue();
+    }
+    return toReturn;
+  }
+
   // Creates a new int[] from a double[]
   public int[] doubleToIntArray(double[] values) {
     int[] intValues = new int[values.length];
@@ -64,7 +83,8 @@ public class MeasurementContainer {
   }
 
   /* Returns measurement mode */
-  public double getMode(int[] a) {
+  public double getMode(double[] in) {
+    int[] a = doubleToIntArray(in);
     int maxValue = 0, maxCount = 0;
 
     for (int i = 0; i < a.length; ++i) {
