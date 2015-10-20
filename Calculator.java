@@ -9,10 +9,11 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-        d.readFromFile("fysisk.csv","psykisk.csv");
+        d.readFromFile("sample_fysisk.csv","sample_psykisk.csv");
     }
 }
 
+// Denne klassen brukes til å gjennomføre beregninger på containerne
 class Handler{
     HashMap<String, Person> persons = new HashMap<String, Person>();
     MeasurementContainer measurements = new MeasurementContainer();
@@ -79,8 +80,10 @@ class Handler{
           //p.addMeasure(m);
           m = new Measurement(headers[2], d, Double.parseDouble(parsed[2]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[3], d, Double.parseDouble(parsed[3]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
 
       }
 
@@ -133,16 +136,22 @@ class Handler{
           //p.addMeasure(m);
           m = new Measurement(headers[3], d, Double.parseDouble(parsed[3]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[4], d, Double.parseDouble(parsed[4]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[5], d, Double.parseDouble(parsed[5]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[6], d, Double.parseDouble(parsed[6]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[7], d, Double.parseDouble(parsed[7]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
           m = new Measurement(headers[8], d, Double.parseDouble(parsed[8]));
           p.addMeasure(m);
+          measurement.addMeasurement(m);
 
       }
 
