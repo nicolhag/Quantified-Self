@@ -9,11 +9,7 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-<<<<<<< HEAD
         d.readFromFile("sample_fysisk.csv","sample_psykisk.csv");
-=======
-        d.readFromFile("fysisk.csv");
->>>>>>> 91d6fb4b144d044cefce9e55b6771c7b5af496c5
     }
 }
 
@@ -49,7 +45,7 @@ class Handler{
           String[] parsed = innlest.split(",");
           String[] headers = header.split(",");
 
-          System.out.println("*********************");
+          //System.out.println("*********************");
 
 
           String timestamp = parsed[0];
@@ -57,12 +53,13 @@ class Handler{
           String numberOfSteps = parsed[2];
           String hoursOfSleep = parsed[3];
 
+          /*
           System.out.println("Name: " + name);
           System.out.println("Timestamp: " + timestamp);
           System.out.println("Number of steps: " + numberOfSteps);
           System.out.println("Hours of sleep: " + hoursOfSleep);
 
-          System.out.println("*********************");
+          System.out.println("*********************"); */
 
 
           Person p = null;
@@ -86,6 +83,8 @@ class Handler{
           p.addMeasure(m);
 
       }
+
+      this.printAll();
     }
 
     private void readPsychological(String header, Scanner leser) {
@@ -95,7 +94,7 @@ class Handler{
           String[] parsed = innlest.split(",");
           String[] headers = header.split(",");
 
-          System.out.println("*********************");
+          //System.out.println("*********************");
 
 
           String timestamp = parsed[0];
@@ -108,12 +107,12 @@ class Handler{
           String alcoholUnits = parsed[7];
           String comments = parsed[8];
 
-          System.out.println("Name: " + name);
+          /*System.out.println("Name: " + name);
           System.out.println("Timestamp: " + timestamp);
           System.out.println("MeasurementNumber: " + measurementNumber);
           System.out.println("Energy level: " + energy);
 
-          System.out.println("*********************");
+          System.out.println("*********************"); */
 
           Person p = null;
           Date d = new Date(timestamp);
@@ -145,7 +144,15 @@ class Handler{
           m = new Measurement(headers[8], d, Double.parseDouble(parsed[8]));
           p.addMeasure(m);
 
+      }
 
+      this.printAll();
+    }
+
+    public void printAll() {
+      //this.measurements.printAll();
+      for(Person pers: persons.values()) {
+        pers.printAll();
       }
     }
 }
@@ -165,7 +172,8 @@ class Person{
         this.measurements.addMeasurement(m);
     }
 
-    public void printAllHours(){
-        measurements.printAll();
+    public void printAll(){
+        System.out.println("\n\nName: " + name);
+        this.measurements.printAll();
     }
 }
