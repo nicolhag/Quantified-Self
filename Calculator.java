@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-        d.readFromFile("sample_fysisk.csv");
+        d.readFromFile("fysisk.csv");
     }
 }
 
