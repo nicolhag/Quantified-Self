@@ -25,6 +25,12 @@ public class MeasurementContainer {
     return false;
   }
 
+  public void printAll() {
+    for(Measurable m: measurements) {
+      System.out.println(m.getMeasurementType() + ": " + m.getValue());
+    }
+  }
+
   // Returns all measurements
   public List getMeasurements() {
     return measurements;
@@ -90,7 +96,7 @@ public class MeasurementContainer {
       double variance;
       double variancePartialSum = 0;
       for (int i = 0; i<m.length; i++){
-          double partSum = m[i]-gjSnitt;
+          double partSum = m[i]-getMean(m);
           variancePartialSum += (partSum*partSum);
       }
       variance = (variancePartialSum/n);

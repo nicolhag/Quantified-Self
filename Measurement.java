@@ -2,11 +2,13 @@ import java.util.Date;
 
 public class Measurement implements Measurable {
 
+  String measurementType = null;
   Date date = null;
   Double value = null;
   Person person = null;
 
-  public Measurement(Date date, Double value) {
+  public Measurement(String measurementType, Date date, Double value) {
+    this.measurementType = measurementType;
     this.date = date;
     this.value = value;
   }
@@ -15,8 +17,12 @@ public class Measurement implements Measurable {
     this.person = person;
   }
 
-  public Double getMeasurement() {
+  public Double getValue() {
     return value;
+  }
+
+  public String getMeasurementType() {
+    return measurementType;
   }
 
   public Date getDate() {
