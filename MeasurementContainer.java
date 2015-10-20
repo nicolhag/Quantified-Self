@@ -85,4 +85,20 @@ public class MeasurementContainer {
       }
   }
 
+  double variance(double[] m){
+      int n = m.length;
+      double variance;
+      double variancePartialSum = 0;
+      for (int i = 0; i<m.length; i++){
+          double partSum = m[i]-gjSnitt;
+          variancePartialSum += (partSum*partSum);
+      }
+      variance = (variancePartialSum/n);
+      return variance;
+  }
+
+  double standardDeviation(double[] m){
+      return Math.sqrt(variance(m));
+  }
+
 }
