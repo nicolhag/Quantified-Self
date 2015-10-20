@@ -9,9 +9,7 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-<<<<<<< HEAD
         d.readFromFile("sample_fysisk.csv","sample_psykisk.csv");
-=======
         if (args.length == 0){
             Scanner term = new Scanner(System.in);
             System.out.println("Hva heter filen med fysiske data?");
@@ -25,7 +23,6 @@ class Calculator{
         } else {
             d.readFromFile(args[0],args[1]);
         }
->>>>>>> fbe5d930a452b2e2bf0c4bbe1635b935b13ee284
     }
 }
 
