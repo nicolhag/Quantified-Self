@@ -9,23 +9,7 @@ import java.io.FileNotFoundException;
 class Calculator{
     public static void main(String[] args) throws Exception {
         Handler d = new Handler();
-<<<<<<< HEAD
         d.readFromFile("sample_fysisk.csv","sample_psykisk.csv");
-=======
-        if (args.length == 0){
-            Scanner term = new Scanner(System.in);
-            System.out.println("Hva heter filen med fysiske data?");
-            String fysisk = term.nextLine();
-
-            System.out.println("Hva heter filen med psykiske data?");
-            String psykisk = term.nextLine();
-            d.readFromFile(fysisk, psykisk);
-        } else if (args[0].trim().equals("default")){
-            d.readFromFile("fysisk.csv", "psykisk.csv");
-        } else {
-            d.readFromFile(args[0],args[1]);
-        }
->>>>>>> fbe5d930a452b2e2bf0c4bbe1635b935b13ee284
     }
 }
 
@@ -34,6 +18,23 @@ class Handler{
     HashMap<String, Person> persons = new HashMap<String, Person>();
     MeasurementContainer measurements = new MeasurementContainer();
 
+    /*
+    *
+    *  METHODS COMBINING AND ANALYSING DATA FROM THE DATA COLLECTIONS
+    *
+    */
+
+    public void printGeneralAveragesSteps() {
+      Collection<Measurable> = measurements.getMeasurements();
+      System.out.println("\nGeneral average for all users ");
+      System.out.println("\n\t Mean " + );
+    }
+
+    /*
+    *
+    *  METHODS FOR READING THE TWO CSV-FILES
+    *
+    *//
     public void readFromFile(String fysisk, String psykisk){
         Scanner fysisk_leser = null;
         Scanner psykisk_leser = null;
