@@ -111,7 +111,7 @@ public class MeasurementContainer {
       }
   }
 
-  double variance(double[] m){
+  public double getVariance(double[] m){
       int n = m.length;
       double variance;
       double variancePartialSum = 0;
@@ -123,8 +123,12 @@ public class MeasurementContainer {
       return variance;
   }
 
-  double standardDeviation(double[] m){
-      return Math.sqrt(variance(m));
+  public double getStandardDeviation(double[] m){
+      return Math.sqrt(getVariance(m));
+  }
+
+  public int getSize() {
+    return measurements.size();
   }
 
 }

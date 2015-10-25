@@ -72,12 +72,16 @@ class Handler{
         double mean = this.measurements.getMean(values);
         double mode = this.measurements.getMode(values);
         double median = this.measurements.getMedian(values);
+        double stdDev = this.measurements.getStandardDeviation(values);
+        double variance = this.measurements.getVariance(values);
 
         System.out.println("\nTOTAL AVERAGE: " + field);
         System.out.println("Number of data points: " + values.length);
         System.out.println("Mean: " + mean);
         System.out.println("Mode: " + mode);
         System.out.println("Median: " + median);
+        System.out.println("StdDev: " + stdDev);
+        System.out.println("Variance: " + variance);
 
         m2 = null;
       //}
