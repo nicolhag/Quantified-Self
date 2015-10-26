@@ -30,6 +30,7 @@ public class Handler{
 
     public void printMenu(){
         System.out.println("VELKOMMEN TIL MYSTISK STATISTIKK OM OSS!!");
+        System.out.println("0. Avslutt hele greia");
         System.out.println("1. Print ut alle mulige mål du kan skrive inn");
         System.out.println("2. Print ut gjennomsnittsverdier: Alle mål, For alle personer samlet");
         System.out.println("3. Print ut gjennomsnittsverdier: Alle mål, For enkeltpersoner");
@@ -39,57 +40,62 @@ public class Handler{
     }
 
     public void ordrelokke(){
-        printMenu();
-        System.out.println("Skriv inn ditt valg (1-6):");
-        Scanner reader = new Scanner(System.in);
-        String read = reader.nextLine();
-        switch(read){
-            case "1": printLabels(); break;
-            case "2":
-            for ( String s : getAllValidLabels() ){
-                printGeneralAverage(s);
-            } break;
-            case "3":
-            for ( String s : getAllValidLabels() ){
-                System.out.print("\nGJENNOMSNITTLIG " + s.toUpperCase() + ":");
-                printAllPersonAverage(s);
-            } break;
-            case "4":
-            System.out.println("Hvem ønsker du å se på?");
-            String navn = reader.nextLine();
-            System.out.println("Hvilket mål ønsker du å se på?");
-            for (String s : getAllValidLabels()){
-                System.out.println("- '" + s + "'");
-            }
-            String hvilket = reader.nextLine();
-            printPersonAverage(navn, hvilket); break;
-            case "5":
-            System.out.println("Hvem ønsker du å se på?");
-            navn = reader.nextLine();
-            System.out.println("Hvilket mål ønsker du å se på?");
-            for (String s : getAllValidLabels()){
-                System.out.println("- '" + s + "'");
-            }
-            hvilket = reader.nextLine();
-            System.out.println("Hvilken ukedag ønsker du å se på?");
-            for (String s : validWeekdays){
-                System.out.println("- '" + s + "'");
-            }
-            String ukedag = reader.nextLine();
-            printPersonAverageOnWeekday(navn, hvilket, ukedag); break;
-            case "6":
-            System.out.println("Hvem ønsker du å se på?");
-            navn = reader.nextLine();
-            System.out.println("Hvilken ukedag ønsker du å se på?");
-            for (String s : validWeekdays){
-                System.out.println("- '" + s + "'");
-            }
-            ukedag = reader.nextLine();
-            for ( String measure : getAllValidLabels() ){
-                printPersonAverageOnWeekday(navn, measure, ukedag);
-            }break;
+        String read = "1";
+        while (!read.equals("0")){
+            printMenu();
+            System.out.println("Skriv inn ditt valg (1-6):");
+            Scanner reader = new Scanner(System.in);
+            read = reader.nextLine();
 
+            switch(read){
+                case "1": printLabels(); break;
+                case "2":
+                for ( String s : getAllValidLabels() ){
+                    printGeneralAverage(s);
+                } break;
+                case "3":
+                for ( String s : getAllValidLabels() ){
+                    System.out.print("\nGJENNOMSNITTLIG " + s.toUpperCase() + ":");
+                    printAllPersonAverage(s);
+                } break;
+                case "4":
+                System.out.println("Hvem ønsker du å se på?");
+                String navn = reader.nextLine();
+                System.out.println("Hvilket mål ønsker du å se på?");
+                for (String s : getAllValidLabels()){
+                    System.out.println("- '" + s + "'");
+                }
+                String hvilket = reader.nextLine();
+                printPersonAverage(navn, hvilket); break;
+                case "5":
+                System.out.println("Hvem ønsker du å se på?");
+                navn = reader.nextLine();
+                System.out.println("Hvilket mål ønsker du å se på?");
+                for (String s : getAllValidLabels()){
+                    System.out.println("- '" + s + "'");
+                }
+                hvilket = reader.nextLine();
+                System.out.println("Hvilken ukedag ønsker du å se på?");
+                for (String s : validWeekdays){
+                    System.out.println("- '" + s + "'");
+                }
+                String ukedag = reader.nextLine();
+                printPersonAverageOnWeekday(navn, hvilket, ukedag); break;
+                case "6":
+                System.out.println("Hvem ønsker du å se på?");
+                navn = reader.nextLine();
+                System.out.println("Hvilken ukedag ønsker du å se på?");
+                for (String s : validWeekdays){
+                    System.out.println("- '" + s + "'");
+                }
+                ukedag = reader.nextLine();
+                for ( String measure : getAllValidLabels() ){
+                    printPersonAverageOnWeekday(navn, measure, ukedag);
+                }break;
+
+            }
         }
+
     }
 
     public void printPersonAverageOnWeekday(String nameOfPerson, String nameOfMeasurement, String day){
