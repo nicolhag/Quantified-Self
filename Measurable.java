@@ -11,4 +11,8 @@ public interface Measurable {
 
   public String getMeasurementType();
 
+  public int getMeasurementNumber();
+
+  public String getComment();
+
 }

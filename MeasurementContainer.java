@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class MeasurementContainer {
-
-  //HashMap<Date, Double> measurements;
-  List<Measurable> measurements;
+  private List<Measurable> measurements;
 
   public MeasurementContainer() {
     this.measurements = new ArrayList<Measurable>();
@@ -32,7 +30,7 @@ public class MeasurementContainer {
   }
 
   // Returns all measurements
-  public List getMeasurements() {
+  public List<Measurable> getMeasurements() {
     return measurements;
   }
 
