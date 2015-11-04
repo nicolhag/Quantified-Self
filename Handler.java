@@ -295,11 +295,16 @@ public class Handler{
           cal.add(Calendar.DAY_OF_MONTH, 1);
           Date theDayAfter = cal.getTime();
 
-          Measurement newMeasurement = new Measurement(numberOfStepsTag, theDayAfter, numberOfSteps);
+          cal = Calendar.getInstance();
+          cal.setTime(date);
+          cal.add(Calendar.DAY_OF_MONTH, -1);
+          Date theDayBefore = cal.getTime();
+
+          Measurement newMeasurement = new Measurement(numberOfStepsTag, theDayBefore, numberOfSteps);
           person.addMeasure(newMeasurement);
           measurements.addMeasurement(newMeasurement);
 
-          newMeasurement = new Measurement(hoursOfSleepTag, date, hoursOfSleep);
+          newMeasurement = new Measurement(hoursOfSleepTag, theDayBefore, hoursOfSleep);
           person.addMeasure(newMeasurement);
           measurements.addMeasurement(newMeasurement);
 
