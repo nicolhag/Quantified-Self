@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 import java.io.File;
 import java.util.Scanner;
@@ -37,13 +40,16 @@ public class Handler{
         System.out.println("4. Print ut gjennomsnittsverdi: Ett mål, For enkeltpersoner");
         System.out.println("5. Print ut en gjennomsnittsverdi for ett mål på én Person på én ukedag");
         System.out.println("6. Print ut gjennomsnittsverdier for alle mål på én Person på én ukedag");
+        System.out.println("7. Print ut dagen med HØYEST forekomst av ett mål på én Person");
+        System.out.println("8. Print ut dagen med LAVEST forekomst av ett mål på én Person");
+        System.out.println("9. Finne alle gjennomsnitt for en gitt måling sine ulike nivå, én Person");
     }
 
     public void ordrelokke(){
         String read = "1";
         while (!read.equals("0")){
             printMenu();
-            System.out.println("Skriv inn ditt valg (1-6):");
+            System.out.println("Skriv inn ditt valg (1-9):");
             Scanner reader = new Scanner(System.in);
             read = reader.nextLine();
 
@@ -91,11 +97,63 @@ public class Handler{
                 ukedag = reader.nextLine();
                 for ( String measure : getAllValidLabels() ){
                     printPersonAverageOnWeekday(navn, measure, ukedag);
-                }break;
+                }
+                break;
+                case "7":
+                System.out.println("Hvem ønsker du å se på?");
+                navn = reader.nextLine();
+                System.out.println("Hvilket mål ønsker du å se på?");
+                for (String s : getAllValidLabels()){
+                    System.out.println("- '" + s + "'");
+                }
+                hvilket = reader.nextLine();
+                printPersonMostFrequentDayOnMeasure(navn, hvilket);
+                break;
+                case "8":
+                System.out.println("Hvem ønsker du å se på?");
+                navn = reader.nextLine();
+                System.out.println("Hvilket mål ønsker du å se på?");
+                for (String s : getAllValidLabels()){
+                    System.out.println("- '" + s + "'");
+                }
+                hvilket = reader.nextLine();
+                printPersonLeastFrequentDayOnMeasure(navn, hvilket);
+                break;
+                case "9":
+                System.out.println("Hvem ønsker du å se på?");
+                navn = reader.nextLine();
+                printAllMeasureTowardsStressLevel(navn);
+                break;
 
             }
         }
+    }
 
+    public void printAllMeasureTowardsStressLevel(String name){
+        String[] allLabels = getAllValidLabels();
+        Person person = persons.get(name);
+
+        for (String s : allLabels){
+            System.out.println("Gjennomsnittsverdi av målingen " + s + ", ved stressnivåene: ");
+            person.printMeasureTowardsStressLevels(s);
+        }
+
+
+
+    }
+
+    public void printPersonMostFrequentDayOnMeasure(String name, String label){
+        Person person = persons.get(name);
+        int result = person.getTheMostFrequentDayOnMeasure(label);
+        double valueOfHighest = person.getTheMostFrequentDayOnMeasureValue(label);
+        System.out.printf("\n\n%s har høyest forekomst av %s : %s med verdien %s\n\n", person.toString(),label, norwegianWeekdays[result], valueOfHighest);
+    }
+
+    public void printPersonLeastFrequentDayOnMeasure(String name, String label){
+        Person person = persons.get(name);
+        int result = person.getTheLeastFrequentDayOnMeasure(label);
+        double valueOfLowest = person.getTheLeastFrequentDayOnMeasureValue(label);
+        System.out.printf("\n\n%s har lavest forekomst av %s : %s med verdien %s\n\n", person.toString(),label, norwegianWeekdays[result], valueOfLowest);
     }
 
     public void printPersonAverageOnWeekday(String nameOfPerson, String nameOfMeasurement, String day){
@@ -230,8 +288,14 @@ public class Handler{
           } else {
               person = persons.get(personName);
           }
-          // Skipping timestamp and personName atm
-          Measurement newMeasurement = new Measurement(numberOfStepsTag, date, numberOfSteps);
+
+          // SUPERHACKZ FOR ADDING A DAY TO THE DATE READ
+          Calendar cal = Calendar.getInstance();
+          cal.setTime(date);
+          cal.add(Calendar.DAY_OF_MONTH, 1);
+          Date theDayAfter = cal.getTime();
+
+          Measurement newMeasurement = new Measurement(numberOfStepsTag, theDayAfter, numberOfSteps);
           person.addMeasure(newMeasurement);
           measurements.addMeasurement(newMeasurement);
 
@@ -240,6 +304,11 @@ public class Handler{
           measurements.addMeasurement(newMeasurement);
 
       }
+    }
+
+    public static String toddMMyy(Date day){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy");
+        String date = formatter.format(day); return date;
     }
 
     private void readPsychological(String header, Scanner leser) {
@@ -279,6 +348,7 @@ public class Handler{
           for (int i = 3; i < 9; i++){
               Measurement newMeasurement = new Measurement(headers[i], date, Double.parseDouble(parsed[i]));
               newMeasurement.setMeasurementNumber(measurementNumber);
+              newMeasurement.setStressLevel(Double.parseDouble(stress));
               person.addMeasure(newMeasurement);
               measurements.addMeasurement(newMeasurement);
               if (comments != null){
@@ -290,8 +360,13 @@ public class Handler{
 
     public void printLabels() {
       System.out.println("Labels: ");
-      for(String s: fysiskLabels) System.out.println("> " + s);
-      for(String s: psykiskLabels) System.out.println("> " + s);
+
+      for(String s: fysiskLabels){
+          System.out.println("> " + s);
+      }
+      for(String s: psykiskLabels){
+          System.out.println("> " + s);
+      }
       System.out.println();
     }
 

@@ -7,6 +7,7 @@ public class Measurement implements Measurable {
   private Double value;
   private Person person;
   private int measurementNr;
+  private double stressLvl;
 
   public Measurement(String measurementType, Date date, Double value) {
     this.measurementType = measurementType;
@@ -36,6 +37,14 @@ public class Measurement implements Measurable {
 
   public Double getValue() {
     return value;
+  }
+
+  public void setStressLevel(double stressLvl){
+    this.stressLvl = stressLvl;
+  }
+
+  public double getStressLevel(){
+      return stressLvl;
   }
 
   public String getMeasurementType() {

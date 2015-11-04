@@ -15,4 +15,6 @@ public interface Measurable {
 
   public String getComment();
 
+  public double getStressLevel();
+
 }
