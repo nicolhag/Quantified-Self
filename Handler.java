@@ -345,7 +345,12 @@ public class Handler{
               person = persons.get(personName);
           }
 
-          for (int i = 3; i < 9; i++){
+          Calendar cal = Calendar.getInstance();
+          cal.setTime(date);
+          cal.add(Calendar.DAY_OF_MONTH, -1);
+          Date theDayBefore = cal.getTime();
+
+          for (int i = 3; i < 8; i++){
               Measurement newMeasurement = new Measurement(headers[i], date, Double.parseDouble(parsed[i]));
               newMeasurement.setMeasurementNumber(measurementNumber);
               newMeasurement.setStressLevel(Double.parseDouble(stress));
@@ -355,6 +360,12 @@ public class Handler{
                   newMeasurement.setComment(comments);
               }
           }
+
+          Measurement newMeasurement = new Measurement(headers[8], theDayBefore, Double.parseDouble(parsed[8]));
+          newMeasurement.setMeasurementNumber(measurementNumber);
+          newMeasurement.setStressLevel(Double.parseDouble(stress));
+          person.addMeasure(newMeasurement);
+          measurements.addMeasurement(newMeasurement);
       }
     }
 
